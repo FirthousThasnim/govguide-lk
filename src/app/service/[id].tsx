@@ -1,31 +1,125 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useLocalSearchParams, Stack } from 'expo-router';
+import { services } from '../../data/services';
 
 export default function ServiceDetailScreen() {
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const service = services.find((s) => s.id === id);
+
+  if (!service) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.notFound}>Service not found.</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Service Detail Screen
-      </Text>
-      <Text>
-        Service ID: {id}
-      </Text>
-    </View>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 30 }}>
+      <Stack.Screen options={{ title: service.category }} />
+
+      <Text style={styles.title}>{service.name}</Text>
+      <Text style={styles.badge}>{service.category}</Text>
+      <Text style={styles.description}>{service.description}</Text>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Department / Office</Text>
+        <Text style={styles.text}>{service.department}</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Required Documents</Text>
+        {service.documents.map((doc, index) => (
+          <Text key={index} style={styles.text}>
+            • {doc}
+          </Text>
+        ))}
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Fee</Text>
+        <Text style={styles.text}>{service.fee}</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Processing Time</Text>
+        <Text style={styles.text}>{service.processingTime}</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Steps</Text>
+        {service.steps.map((step, index) => (
+          <Text key={index} style={styles.text}>
+            {index + 1}. {step}
+          </Text>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
+    padding: 16, 
+    backgroundColor: '#f4f6fa' 
+  },
+
+  center: { 
+    flex: 1, 
     alignItems: 'center', 
-    justifyContent: 'center', 
-    gap: 8 
+    justifyContent: 'center' 
+  },
+
+  notFound: { 
+    fontSize: 16, 
+    color: '#777' 
   },
 
   title: { 
-    fontSize: 20, 
-    fontWeight: 'bold' 
+    fontSize: 22, 
+    fontWeight: 'bold', 
+    color: '#222' 
+  },
+
+  badge: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#e6ecf7',
+    color: '#1e6fd9',
+    fontWeight: '600',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 14,
+    marginTop: 8,
+    overflow: 'hidden',
+  },
+
+  description: { 
+    fontSize: 15, 
+    color: '#444', 
+    marginTop: 12, 
+    lineHeight: 22 
+  },
+
+  section: {
+    backgroundColor: '#fff',
+    padding: 14,
+    borderRadius: 10,
+    marginTop: 14,
+    elevation: 2,
+  },
+  sectionTitle: { 
+    fontSize: 16, 
+    fontWeight: '700', 
+    color: '#1e6fd9', 
+    marginBottom: 6 
+  },
+
+  text: { 
+    fontSize: 14, 
+    color: '#333', 
+    marginBottom: 4, 
+    lineHeight: 20 
   },
   
 });
