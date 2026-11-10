@@ -1,10 +1,22 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { services } from '../../data/services';
+import { getFavourites, toggleFavourite } from '../../utils/storage';
 
 export default function ServiceDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const service = services.find((s) => s.id === id);
+  const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    getFavourites().then((list) => setIsFav(list.includes(String(id))));
+  }, [id]);
+
+  const onToggleFav = async () => {
+    const updated = await toggleFavourite(String(id));
+    setIsFav(updated.includes(String(id)));
+  };
 
   if (!service) {
     return (
@@ -20,6 +32,16 @@ export default function ServiceDetailScreen() {
 
       <Text style={styles.title}>{service.name}</Text>
       <Text style={styles.badge}>{service.category}</Text>
+
+      <TouchableOpacity
+        style={[styles.favButton, isFav && styles.favButtonActive]}
+        onPress={onToggleFav}
+      >
+        <Text style={[styles.favText, isFav && styles.favTextActive]}>
+          {isFav ? '♥ Saved to Favourites' : '♡ Add to Favourites'}
+        </Text>
+      </TouchableOpacity>
+
       <Text style={styles.description}>{service.description}</Text>
 
       <View style={styles.section}>
@@ -94,6 +116,29 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
+  favButton: {
+    alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: '#e0457b',
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginTop: 12,
+  },
+
+  favButtonActive: { 
+    backgroundColor: '#e0457b' 
+  },
+
+  favText: { 
+    color: '#e0457b', 
+    fontWeight: '600' 
+  },
+
+  favTextActive: { 
+    color: '#fff' 
+  },
+
   description: { 
     fontSize: 15, 
     color: '#444', 
@@ -108,6 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 14,
     elevation: 2,
   },
+
   sectionTitle: { 
     fontSize: 16, 
     fontWeight: '700', 
