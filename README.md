@@ -1,56 +1,220 @@
-# Welcome to your Expo app 👋
+# 🇱🇰 GovGuide LK – Government Services Guide
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📌 Project Overview
 
-## Get started
+**GovGuide LK** is a mobile application designed to help Sri Lankan citizens easily discover and access information about government services.
 
-1. Install dependencies
+The application provides information about government departments, available services, required documents, and application procedures in one place.
 
-   ```bash
-   npm install
-   ```
+It aims to make government service information more accessible, organized, and user-friendly.
 
-2. Start the app
+## 🎯 Objectives
 
-   ```bash
-   npx expo start
-   ```
+- Provide easy access to Sri Lankan government service information.
+- Help users find services through search and category filters.
+- Display service details and required information.
+- Help users organize and track their applications.
+- Provide a convenient and user-friendly mobile experience.
 
-In the output, you'll find options to open the app in a
+## ✨ Main Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 1. Home Screen
+- Displays available government services.
+- Shows the total number of services.
+- Provides a search option.
+- Allows users to filter services by category.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 2. Service Search
+- Search services by name.
+- Search by government department.
+- Search by service description.
 
-## Get a fresh project
+### 3. Categories
+- Browse services based on categories.
+- Easily identify relevant government services.
 
-When you're ready, run:
+### 4. Service Details
+- View detailed information about selected services.
+- Access relevant department and service information.
 
-```bash
-npm run reset-project
+### 5. Favourites
+- Save favourite government services.
+- Access saved services easily.
+
+### 6. Application Tracker
+- Keep track of applications.
+- Organize application information.
+- View application status.
+
+### 7. Document Checklist
+- View required documents.
+- Manage document checklist items.
+
+### 8. Light and Dark Mode
+- Supports Light Mode and Dark Mode.
+- Users can switch between themes.
+- Theme preference is saved using local storage.
+
+### 9. Local Data Storage
+- Uses AsyncStorage to save supported user data locally.
+- Helps retain saved information between app sessions.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| React Native | Mobile application development |
+| Expo | Development environment |
+| TypeScript | Programming language |
+| Expo Router | Application navigation |
+| AsyncStorage | Local data storage |
+| React Hooks | State and component management |
+| StyleSheet | UI styling |
+| DateTimePicker | Date and time selection |
+
+## 📱 Application Screens
+
+The application includes:
+
+- Home
+- Categories
+- Service Details
+- Applications
+- Favourites
+- Document Checklist
+
+## 📂 Project Structure
+
+```text
+govguide-lk/
+│
+├── src/
+│   ├── app/
+│   │   ├── (tabs)/
+│   │   │   ├── index.tsx
+│   │   │   ├── categories.tsx
+│   │   │   ├── applications.tsx
+│   │   │   ├── favourites.tsx
+│   │   │   └── checklist.tsx
+│   │   │
+│   │   └── service/
+│   │
+│   ├── components/
+│   ├── constants/
+│   │   └── theme.ts
+│   │
+│   ├── context/
+│   │   └── ThemeContext.tsx
+│   │
+│   ├── data/
+│   │   └── services.ts
+│   │
+│   └── hooks/
+│       └── use-theme.ts
+│
+├── assets/
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## ⚙️ Installation and Setup
 
-### Other setup steps
+### Prerequisites
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- Node.js
+- npm
+- Expo development environment
+- Visual Studio Code (recommended)
 
-## Learn more
+### Step 1: Clone the Repository
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+git clone https://github.com/FirthousThasnim/govguide-lk.git
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Step 2: Navigate to the Project
 
-## Join the community
+```bash
+cd govguide-lk
+```
 
-Join our community of developers creating universal apps.
+### Step 3: Install Dependencies
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm install
+```
+
+### Step 4: Start the Application
+
+```bash
+npx expo start
+```
+
+### Step 5: Run the Application
+
+Use the Expo development options to run the application on:
+
+- Android Emulator
+- iOS Simulator
+- Expo Go (if compatible with the installed dependencies)
+- Web Browser (if supported by the project)
+
+## 🧪 Testing
+
+The following features should be tested:
+
+- Service search functionality.
+- Category filtering.
+- Service details navigation.
+- Adding and accessing favourite services.
+- Application tracking.
+- Document checklist functionality.
+- Light and Dark Mode switching.
+- Local data persistence.
+
+TypeScript validation:
+
+```bash
+npx tsc --noEmit
+```
+
+## 📸 Application Screenshots
+
+### Home Screen
+![Home Light](screenshots/home-light.png)
+
+### Dark Mode
+![Home Dark](screenshots/home-dark.png)
+
+### Categories
+![Categories](screenshots/categories.png)
+
+### Applications
+![Applications](screenshots/applications.png)
+
+### Favourites
+![Favourites](screenshots/favourites.png)
+
+### Document Checklist
+![Checklist](screenshots/checklist.png)
+
+## 🚀 Future Improvements
+
+- Integrate real-time government service information.
+- Add user authentication.
+- Provide notifications for application updates.
+- Improve accessibility and multilingual support.
+- Integrate official government service links.
+
+## 👨‍💻 Developer
+
+**Project Name:** GovGuide LK
+
+**Developer:** Firthous Thasnim
+
+**GitHub Repository:** FirthousThasnim/govguide-lk
+
+## 📄 License
+
+This project is developed for academic purposes.

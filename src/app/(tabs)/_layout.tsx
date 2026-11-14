@@ -22,6 +22,13 @@ export default function TabLayout(){
                 }}
             />
             <Tabs.Screen
+                name="applications"
+                options={{
+                    title: 'Applications',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="calendar" size={size} color={color as string} />
+                }}
+            />
+            <Tabs.Screen
                 name="favourites"
                 options={{
                     title: 'Favourites',
