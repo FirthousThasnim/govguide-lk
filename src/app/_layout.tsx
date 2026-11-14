@@ -18,6 +18,13 @@ export default function RootLayout(){
         }}
       />
 
+      <Stack.Screen
+        name="new-application"
+        options={{
+          title:'New Application'
+        }}
+      />
+
     </Stack>
   );
 }

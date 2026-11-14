@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, Stack } from 'expo-router';
+import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { services } from '../../data/services';
 import { getFavourites, toggleFavourite } from '../../utils/storage';
 
 export default function ServiceDetailScreen() {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const service = services.find((s) => s.id === id);
   const [isFav, setIsFav] = useState(false);
@@ -40,6 +41,13 @@ export default function ServiceDetailScreen() {
         <Text style={[styles.favText, isFav && styles.favTextActive]}>
           {isFav ? '♥ Saved to Favourites' : '♡ Add to Favourites'}
         </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.planButton}
+        onPress={() => router.push({ pathname: '/new-application', params: { serviceId: service.id } })}
+      >
+        <Text style={styles.planText}>📅 Plan this application</Text>
       </TouchableOpacity>
 
       <Text style={styles.description}>{service.description}</Text>
@@ -128,6 +136,20 @@ const styles = StyleSheet.create({
 
   favButtonActive: { 
     backgroundColor: '#e0457b' 
+  },
+
+  planButton: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#1e6fd9',
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    marginTop: 10,
+  },
+
+  planText: { 
+    color: '#fff', 
+    fontWeight: '600' 
   },
 
   favText: { 
